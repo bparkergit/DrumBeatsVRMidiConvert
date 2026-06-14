@@ -4,7 +4,7 @@
 :: Uses csv2midi (https://www.fourmilab.ch/webtools/midicsv/) 
 :: Usage: drag midi file onto this script.  output files will be in output directory.  copy output files to Drumbeatsvr Songs directory.
 @echo off
-set PATH=%PATH%;C:\"Program Files (X86)"\VideoLAN\VLC
+set PATH=%PATH%;C:\"Program Files"\VideoLAN\VLC
 
 IF %1.==. GOTO No1
 :: IF %2.==. GOTO No1
@@ -25,8 +25,8 @@ del temp.csv temp.out.csv
 
 echo Generating WAV files...
 for %%a in ("%~1") do (
-echo Writing file: %~dp0output\%%~na.wav
-vlc.exe %~dp0output\%%~na.tmp.mid --no-repeat --sout "#transcode{acodec=s16l,ab=128}:std{access=file,mux=wav,dst=%~dp0output\%%~na.wav} vlc://quit"
+echo Writing file: %~dp0output\%%~na.ogg
+vlc.exe %~dp0output\%%~na.tmp.mid --no-repeat --sout "#transcode{acodec=vorb,ab=128}:std{access=file,mux=ogg,dst=%~dp0output\%%~na.ogg}" vlc://quit
 del %~dp0output\%%~na.tmp.mid
 )
 
